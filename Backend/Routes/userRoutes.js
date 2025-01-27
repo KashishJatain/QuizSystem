@@ -1,0 +1,12 @@
+const express=require("express");
+const { registerUser, verifyEmail, loginUser, getUser, updateUser, getAllUser, deleteUser } = require("../Controller/userController");
+const { authmiddleware } = require("../Middleware/authmiddleware");
+const app=express.Router();
+app.post("/signup",registerUser);
+app.post("/verify/:token", verifyEmail);
+app.post("/login",loginUser);
+app.get("/:id",authmiddleware,getUser);
+app.get("/",authmiddleware,getAllUser);
+app.patch("/:id",authmiddleware,updateUser);
+app.delete("/:id",authmiddleware,deleteUser);
+module.exports=app;
